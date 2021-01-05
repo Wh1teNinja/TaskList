@@ -34,6 +34,28 @@
 
 #task-list > li > p {
   margin: 0;
+  width: 100%;
+}
+
+#task-list div {
+  width: 100%;
+}
+
+.task-text-input {
+  border: none;
+  background: none;
+  outline: none;
+  width: 100%;
+
+  font-size: 1em;
+}
+
+.delete-task-button {
+  border: none;
+  background: none;
+  cursor: pointer;
+  font-size: 0.9em;
+  outline: none;
 }
 
 .finished {

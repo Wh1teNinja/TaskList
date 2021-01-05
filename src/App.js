@@ -15,16 +15,22 @@ function App() {
     setTasks(
       tasks.concat({
         key: new Date().getUTCMilliseconds(),
-        description: "Some text",
+        description: "",
         completed: false,
       })
     );
   };
-  
+
   const changeTask = (changedTask) => {
     setTasks(tasks.map(task => {
       return task.key === changedTask.key ? changedTask : task;
     }));
+  }
+
+  const deleteTask = (key) => {
+    setTasks(tasks.filter(task => {
+      return task.key !== key;
+    }))
   }
 
   return (
@@ -34,6 +40,7 @@ function App() {
           return (
             <Task
               key={task.key}
+              deleteTask={deleteTask}
               changeTask={changeTask}
               task={task}
             />
