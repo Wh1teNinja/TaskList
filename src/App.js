@@ -1,24 +1,47 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState, useEffect } from "react";
+import "./App.css";
+import Task from "./Task";
 
 function App() {
+  const [tasks, setTasks] = useState(
+    JSON.parse(localStorage.getItem("tasks")) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem("tasks", JSON.stringify(tasks));
+  }, [tasks]);
+
+  const addNewTask = () => {
+    setTasks(
+      tasks.concat({
+        key: new Date().getUTCMilliseconds(),
+        description: "Some text",
+        completed: false,
+      })
+    );
+  };
+  
+  const changeTask = (changedTask) => {
+    setTasks(tasks.map(task => {
+      return task.key === changedTask.key ? changedTask : task;
+    }));
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <main id='app' className="flex cs-column">
+      <ul id="task-list">
+        {tasks.map((task) => {
+          return (
+            <Task
+              key={task.key}
+              changeTask={changeTask}
+              task={task}
+            />
+          );
+        })}
+      </ul>
+      <button id="add-button" onClick={addNewTask}>Add</button>
+    </main>
   );
 }
 
