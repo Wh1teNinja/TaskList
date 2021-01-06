@@ -22,22 +22,28 @@ function App() {
   };
 
   const changeTask = (changedTask) => {
-    setTasks(tasks.map(task => {
-      return task.key === changedTask.key ? changedTask : task;
-    }));
-  }
+    setTasks(
+      tasks.map((task) => {
+        return task.key === changedTask.key ? changedTask : task;
+      })
+    );
+  };
 
   const deleteTask = (key) => {
-    setTasks(tasks.filter(task => {
-      return task.key !== key;
-    }))
-  }
+    setTasks(
+      tasks.filter((task) => {
+        return task.key !== key;
+      })
+    );
+  };
 
   return (
     <div id='app'>
-      <header><h1>To-Do List</h1></header>
-      <main className="flex ac-column">
-        <ul id="task-list">
+      <header>
+        <h1>Task List</h1>
+      </header>
+      <main className='flex ac-column'>
+        <ul id='task-list'>
           {tasks.map((task) => {
             return (
               <Task
@@ -49,7 +55,9 @@ function App() {
             );
           })}
         </ul>
-        <button id="add-button" onClick={addNewTask}>Add</button>
+        <button id='add-button' onClick={addNewTask}>
+          Add
+        </button>
       </main>
     </div>
   );
