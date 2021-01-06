@@ -4,12 +4,15 @@ body {
 }
 
 #root {
-  
   height: 100vh;
 
-  background-color: pink;
+}
 
+.flex {
   display: flex;
+}
+
+.ac-column {
   flex-direction: column;
-  align-items: center;
+  align-items: column;
 }

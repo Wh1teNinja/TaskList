@@ -34,21 +34,24 @@ function App() {
   }
 
   return (
-    <main id='app' className="flex cs-column">
-      <ul id="task-list">
-        {tasks.map((task) => {
-          return (
-            <Task
-              key={task.key}
-              deleteTask={deleteTask}
-              changeTask={changeTask}
-              task={task}
-            />
-          );
-        })}
-      </ul>
-      <button id="add-button" onClick={addNewTask}>Add</button>
-    </main>
+    <div id='app'>
+      <header><h1>To-Do List</h1></header>
+      <main className="flex ac-column">
+        <ul id="task-list">
+          {tasks.map((task) => {
+            return (
+              <Task
+                key={task.key}
+                deleteTask={deleteTask}
+                changeTask={changeTask}
+                task={task}
+              />
+            );
+          })}
+        </ul>
+        <button id="add-button" onClick={addNewTask}>Add</button>
+      </main>
+    </div>
   );
 }
 

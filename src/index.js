@@ -6,7 +6,6 @@ import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <header><h1>To-Do List</h1></header>
     <App />
   </React.StrictMode>,
   document.getElementById('root')

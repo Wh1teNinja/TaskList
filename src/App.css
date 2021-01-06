@@ -1,11 +1,19 @@
 #app {
   height: 100%;
-  width: 400px;
-
-  padding: 15px;
+  width: 100%;
+  
+  background-color: pink;
 
   display: flex;
   flex-direction: column;
+  align-items: center;
+}
+
+#app > main {
+  height: 96%;
+  width: 400px;
+
+  padding: 2%;
 
   background-color: #b4b4b4;
 }
@@ -30,6 +38,8 @@
   -o-transform: scale(1.4); /* Opera */
   transform: scale(1.4);
   margin: 0.5em 0.8em;
+  
+  cursor: pointer;
 }
 
 #task-list > li > p {
@@ -42,12 +52,18 @@
 }
 
 .task-text-input {
+  border-radius: 10px;
   border: none;
-  background: none;
+  background: #cfcfcf;
   outline: none;
   width: 100%;
 
   font-size: 1em;
+}
+
+.task-text-input:disabled {
+  cursor: pointer;
+  background: none;
 }
 
 .delete-task-button {
@@ -60,4 +76,8 @@
 
 .finished {
   text-decoration:line-through;
+}
+
+#add-button {
+  cursor: pointer;
 }
