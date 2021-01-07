@@ -42,7 +42,7 @@ function Task(props) {
         onChange={checkboxOnChange}
         checked={props.task.completed}
       />
-      <div onDoubleClick={handleOnDblClick}>
+      <div onDoubleClick={handleOnDblClick}> {/*onDoubleClick doesn't work with disabled input so this div with this function is here*/}
         <input
           ref={inputRef}
           placeholder='Enter a task...'

@@ -1,65 +1,39 @@
 import { useState, useEffect } from "react";
 import "./App.css";
-import Task from "./Task";
+import themes from "./themes.json";
+import { ThemeContext } from "./contexts";
+import TaskList from "./TaskList";
+import SettingsBar from "./SettingsBar";
 
 function App() {
-  const [tasks, setTasks] = useState(
-    JSON.parse(localStorage.getItem("tasks")) || []
+  //==========================< Hooks >=============================
+  // Hooks to get, set and save theme option
+  const [theme, setTheme] = useState(
+    JSON.parse(window.localStorage.getItem("theme")) || themes.pink
   );
-
   useEffect(() => {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-  }, [tasks]);
+    window.localStorage.setItem("theme", JSON.stringify(theme));
+  });
+  //================================================================
 
-  const addNewTask = () => {
-    setTasks(
-      tasks.concat({
-        key: new Date().getUTCMilliseconds(),
-        description: "",
-        completed: false,
-      })
-    );
+  //=========================< Functions >==========================
+  // Theme change function
+  const changeTheme = (themeTitle) => {
+    setTheme(themes[themeTitle]);
   };
 
-  const changeTask = (changedTask) => {
-    setTasks(
-      tasks.map((task) => {
-        return task.key === changedTask.key ? changedTask : task;
-      })
-    );
-  };
-
-  const deleteTask = (key) => {
-    setTasks(
-      tasks.filter((task) => {
-        return task.key !== key;
-      })
-    );
-  };
+  //=================================================================
 
   return (
-    <div id='app'>
-      <header>
-        <h1>Task List</h1>
-      </header>
-      <main className='flex ac-column'>
-        <ul id='task-list'>
-          {tasks.map((task) => {
-            return (
-              <Task
-                key={task.key}
-                deleteTask={deleteTask}
-                changeTask={changeTask}
-                task={task}
-              />
-            );
-          })}
-        </ul>
-        <button id='add-button' onClick={addNewTask}>
-          Add
-        </button>
-      </main>
-    </div>
+    <ThemeContext.Provider value={{theme, changeTheme}}>
+      <div id='app' style={{backgroundColor: theme.background}}>
+        <header>
+          <h1>Task List</h1>
+        </header>
+        <SettingsBar />
+        <TaskList />
+      </div>
+    </ThemeContext.Provider>
   );
 }
 
