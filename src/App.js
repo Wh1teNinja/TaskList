@@ -19,7 +19,8 @@ function App() {
   //=========================< Functions >==========================
   // Theme change function
   const changeTheme = (themeTitle) => {
-    setTheme(themes[themeTitle]);
+    if (themes[themeTitle] !== theme)
+      setTheme(themes[themeTitle]);
   };
 
   //=================================================================

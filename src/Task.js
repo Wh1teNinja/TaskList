@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { ThemeContext } from "./contexts";
 
 function Task(props) {
   // This state changes to 'false' when double clicked on task '<p>' and goes back to 'true' with 'onBlur'
@@ -36,36 +37,43 @@ function Task(props) {
   };
 
   return (
-    <li key={props.task.key}>
-      <input
-        type='checkbox'
-        onChange={checkboxOnChange}
-        checked={props.task.completed}
-      />
-      <div onDoubleClick={handleOnDblClick}> {/*onDoubleClick doesn't work with disabled input so this div with this function is here*/}
-        <input
-          ref={inputRef}
-          placeholder='Enter a task...'
-          className={
-            props.task.completed && !descInput
-              ? "task-text-input finished"
-              : "task-text-input"
-          }
-          type='text'
-          onBlur={handleOnBlur}
-          onChange={handleTextOnChange}
-          value={props.task.description}
-          disabled={!descInput}
-          autoFocus
-        />
-      </div>
-      <button
-        className='delete-task-button'
-        onClick={() => props.deleteTask(props.task.key)}
-      >
-        <i className='fas fa-trash'></i>
-      </button>
-    </li>
+    <ThemeContext.Consumer>
+      {({ theme, changeTheme }) => (
+        <li key={props.task.key}>
+          <input
+            type='checkbox'
+            onChange={checkboxOnChange}
+            style={{ backgroundColor: theme.listBackground }}
+            checked={props.task.completed}
+          />
+          {/*onDoubleClick doesn't work with disabled input so this div with this function is here*/}
+          <div onDoubleClick={handleOnDblClick}>
+            <input
+              ref={inputRef}
+              placeholder='Enter a task...'
+              className={
+                props.task.completed && !descInput
+                  ? "task-text-input finished"
+                  : "task-text-input"
+              }
+              type='text'
+              onBlur={handleOnBlur}
+              onChange={handleTextOnChange}
+              value={props.task.description}
+              disabled={!descInput}
+              style={{ color: theme.text }}
+              autoFocus
+            />
+          </div>
+          <button
+            className='delete-task-button'
+            onClick={() => props.deleteTask(props.task.key)}
+          >
+            <i className='fas fa-trash' style={{ color: theme.text }}></i>
+          </button>
+        </li>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 

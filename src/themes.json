@@ -1,7 +1,12 @@
 {
   "pink": {
-    "background": "pink",
-    "listBackground": "grey",
-    "text": "pink"
+    "background": "#fdddff",
+    "listBackground": " #d8d8d8",
+    "text": "#625466"
+  },
+  "midnight": {
+    "background": "#14192C",
+    "listBackground": "#262642",
+    "text": "#40525E"
   }
 }

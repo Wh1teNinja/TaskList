@@ -1,4 +1,5 @@
-import {useEffect, useState} from 'react';
+import { useEffect, useState } from "react";
+import { ThemeContext } from "./contexts";
 import Task from "./Task";
 
 function TaskList(props) {
@@ -44,23 +45,27 @@ function TaskList(props) {
   //=================================================================
 
   return (
-    <main className='flex ac-column'>
-      <ul id='task-list'>
-        {tasks.map((task) => {
-          return (
-            <Task
-              key={task.key}
-              deleteTask={deleteTask}
-              changeTask={changeTask}
-              task={task}
-            />
-          );
-        })}
-      </ul>
-      <button id='add-button' onClick={addNewTask}>
-        Add
-      </button>
-    </main>
+    <ThemeContext.Consumer>
+      {({ theme, changeTheme }) => (
+        <main className='flex ac-column' style={{backgroundColor: theme.listBackground}}>
+          <ul id='task-list'>
+            {tasks.map((task) => {
+              return (
+                <Task
+                  key={task.key}
+                  deleteTask={deleteTask}
+                  changeTask={changeTask}
+                  task={task}
+                />
+              );
+            })}
+          </ul>
+          <button id='add-button' onClick={addNewTask}>
+            Add
+          </button>
+        </main>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 
