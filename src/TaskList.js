@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { ThemeContext } from "./contexts";
 import Task from "./Task";
+import Utils from "./Utils";
 
 function TaskList(props) {
   //==========================< Hooks >=============================
@@ -46,8 +47,11 @@ function TaskList(props) {
 
   return (
     <ThemeContext.Consumer>
-      {({ theme, changeTheme }) => (
-        <main className='flex ac-column' style={{backgroundColor: theme.listBackground}}>
+      {({ theme }) => (
+        <main
+          className='flex ac-column'
+          style={{ backgroundColor: theme.listBackground }}
+        >
           <ul id='task-list'>
             {tasks.map((task) => {
               return (
@@ -60,8 +64,16 @@ function TaskList(props) {
               );
             })}
           </ul>
-          <button id='add-button' onClick={addNewTask}>
-            Add
+          <button
+            id='add-button'
+            onClick={addNewTask}
+            style={{color: theme.text}}
+            onMouseEnter={(e) =>
+              Utils.handleHoverEnter(e, `color: ${theme.text};`, theme.listBackground)
+            }
+            onMouseLeave={(e) => Utils.handleHoverLeave(e, `color: ${theme.text};`)}
+          >
+            + Add
           </button>
         </main>
       )}

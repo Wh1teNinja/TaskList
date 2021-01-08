@@ -27,7 +27,7 @@ function ThemePickerButton(props) {
             <input
               type='radio'
               id={props.themeName + "-theme"}
-              name={themes}
+              name={'themes'}
               className='hidden-radio'
               value={props.themeName}
               onChange={() => {changeTheme(props.themeName)}}
