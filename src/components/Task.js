@@ -8,8 +8,10 @@
 /* This element provides delete button for the task as well. 
 /****************************************************************/
 import React, { useState, useEffect } from "react";
-import { ThemeContext } from "./contexts";
-import Utils from './Utils';
+import ThemeContext from "../ThemeContext";
+import ModulesContext from '../ModulesContext';
+import Utils from "../utils";
+import TaskTime from "./TaskTime";
 
 function Task(props) {
   // This state changes to 'false' when double clicked on task '<p>' and goes back to 'true' with 'onBlur'
@@ -40,12 +42,18 @@ function Task(props) {
     props.changeTask(changedTask);
   };
 
-  const handleOnDblClick = (e) => {
+  const handleOnDblClick = () => {
     setDescInput(true);
   };
 
   const handleOnBlur = () => {
     setDescInput(false);
+  };
+
+  const handleTimerChange = (newParams) => {
+    const changedTask = props.task;
+    changedTask.timer = newParams;
+    props.changeTask(changedTask);
   };
 
   //==========================================================================
@@ -55,8 +63,23 @@ function Task(props) {
       {({ theme }) => (
         <li
           key={props.task.key}
-          onMouseEnter={(e) => Utils.handleHoverEnter(e, "", theme.listBackground)}
-          onMouseLeave={(e) => Utils.handleHoverLeave(e, "")}
+          style={{
+            border: `solid 1px ${theme.text}50`,
+            boxShadow: `0 4px 2px ${theme.text}20`,
+          }}
+          onMouseEnter={(e) =>
+            Utils.handleHoverEnter(
+              e,
+              `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`,
+              theme.listBackground
+            )
+          }
+          onMouseLeave={(e) =>
+            Utils.handleHoverLeave(
+              e,
+              `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`
+            )
+          }
         >
           <input
             type='checkbox'
@@ -65,7 +88,7 @@ function Task(props) {
             checked={props.task.completed}
           />
           {/*onDoubleClick doesn't work with disabled input this is why this div is here*/}
-          <div onDoubleClick={handleOnDblClick}>
+          <div className='task-description' onDoubleClick={handleOnDblClick}>
             <input
               ref={inputRef}
               placeholder='Enter a task...'
@@ -91,6 +114,17 @@ function Task(props) {
           >
             <i className='fas fa-trash' style={{ color: theme.text }}></i>
           </button>
+          <ModulesContext.Consumer>
+            {({ params }) => {
+              if (params.taskTime.enabled)
+                return (
+                  <TaskTime
+                    handleTimerChange={handleTimerChange}
+                    timer={props.task.timer}
+                  />
+                );
+            }}
+          </ModulesContext.Consumer>
         </li>
       )}
     </ThemeContext.Consumer>

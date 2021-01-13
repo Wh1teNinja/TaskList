@@ -1,0 +1,12 @@
+{
+  "taskTime": {
+    "title": "Task Time",
+    "desc": "Adds timer to track time spent on each task.",
+    "parameters": {
+      "multitasking": {
+        "title":"Multitasking",
+        "desc": "Allows two or more task timers to run simultaneously."
+      }
+    }
+  }
+}

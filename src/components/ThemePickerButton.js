@@ -1,18 +1,7 @@
-import { ThemeContext } from "./contexts";
-import themes from "./themes.json";
-
-function getAllThemes() {
-  let themesArray = [];
-  for (let theme in themes) {
-    themesArray.push(theme);
-  }
-  return themesArray;
-}
+import ThemeContext from "../ThemeContext.js";
 
 function compareThemes(theme1, theme2) {
-  for (let key in theme1)
-    if (theme1[key] !== theme2[key])
-      return false;
+  for (let key in theme1) if (theme1[key] !== theme2[key]) return false;
   return true;
 }
 
@@ -22,16 +11,17 @@ function ThemePickerButton(props) {
       {({ theme, changeTheme }) => (
         <div id='theme-picker-buttons'>
           <label htmlFor={props.themeName + "-theme"}>
-            {props.themeName.charAt(0).toUpperCase() +
-              props.themeName.slice(1)}
+            {props.themeName.charAt(0).toUpperCase() + props.themeName.slice(1)}
             <input
               type='radio'
               id={props.themeName + "-theme"}
-              name={'themes'}
+              name={"themes"}
               className='hidden-radio'
               value={props.themeName}
-              onChange={() => {changeTheme(props.themeName)}}
-              checked={compareThemes(theme, props.theme)} 
+              onChange={() => {
+                changeTheme(props.themeName);
+              }}
+              checked={compareThemes(theme, props.theme)}
             />
             <span
               className='theme-picker-custom-radio'
@@ -51,26 +41,4 @@ function ThemePickerButton(props) {
   );
 }
 
-function SettingsBar(props) {
-  return (
-    <div id='settings-sidebar' className='flex ac-column'>
-      <header>
-        <h2>Settings</h2>
-      </header>
-      <div id='theme-picker'>
-        <h3>Themes</h3>
-        {getAllThemes().map((theme) => {
-          return (
-            <ThemePickerButton
-              themeName={theme}
-              theme={themes[theme]}
-              key={theme}
-            ></ThemePickerButton>
-          );
-        })}
-      </div>
-    </div>
-  );
-}
-
-export default SettingsBar;
+export default ThemePickerButton;

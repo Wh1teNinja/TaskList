@@ -19,7 +19,8 @@
 }
 
 #app > main {
-  height: 98%;
+  position: relative;
+  height: 100%;
   width: 400px;
 
   padding: 1%;
@@ -38,13 +39,10 @@
   display: flex;
 
   font-size: 1.4em;
-  padding: 10px 0;
+  padding: 10px 5px;
+  margin: 10px 0 0 0;
 
-  border-radius: 10px;
-}
-
-#task-list > li:hover {
-  background-color: #ffffff11;
+  border-radius: 5px;
 }
 
 #task-list > li > input[type=checkbox] {
@@ -63,7 +61,7 @@
   width: 100%;
 }
 
-#task-list div {
+#task-list .task-description {
   width: 100%;
 }
 
@@ -111,6 +109,23 @@
   background: none;
 
   outline: none;
+}
+
+.task-time {
+  position: absolute;
+  left: 100%;
+  font-size: 1em;
+  background-color: white;
+
+  width: 25%;
+}
+
+.timer {
+
+}
+
+.timer-button {
+
 }
 
 /* Settings Sidebar */

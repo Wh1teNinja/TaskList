@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { ThemeContext } from "./contexts";
+import ThemeContext from "../ThemeContext";
 import Task from "./Task";
-import Utils from "./Utils";
+import Utils from "../utils";
 
 function TaskList(props) {
   //==========================< Hooks >=============================
@@ -23,6 +23,12 @@ function TaskList(props) {
         key: new Date().getUTCMilliseconds(),
         description: "",
         completed: false,
+        timer: {
+          timerID: "",
+          enabled: false,
+          time: 0,
+          lastUpdate: new Date(),
+        },
       })
     );
   };
@@ -67,9 +73,13 @@ function TaskList(props) {
           <button
             id='add-button'
             onClick={addNewTask}
-            style={{color: theme.text}}
+            style={{ color: theme.text }}
             onMouseEnter={(e) =>
-              Utils.handleHoverEnter(e, `color: ${theme.text};`, theme.listBackground)
+              Utils.handleHoverEnter(
+                e,
+                `color: ${theme.text};`,
+                theme.listBackground
+              )
             }
             onMouseLeave={(e) => Utils.handleHoverLeave(e, `color: ${theme.text};`)}
           >

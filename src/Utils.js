@@ -27,11 +27,10 @@ let Utils = {
 
   //-----------------------------------------------------------------
   // Hover implementation using automatic color change depending
-  // on brightness using 'slightlyChangeBgColor' function
+  // on brightness using 'changeColorByLuma' function
   handleHoverEnter: (e, styles, bgColor) => {
-    e.currentTarget.style = `background: ${Utils.changeColorByLuma(
-      bgColor
-    )};` + styles;
+    e.currentTarget.style =
+      `background: ${Utils.changeColorByLuma(bgColor)};` + styles;
   },
 
   handleHoverLeave: (e, styles) => {
