@@ -8,8 +8,9 @@
 /* This element provides delete button for the task as well. 
 /****************************************************************/
 import React, { useState, useEffect } from "react";
+import { Draggable } from "react-beautiful-dnd";
 import ThemeContext from "../ThemeContext";
-import ModulesContext from '../ModulesContext';
+import ModulesContext from "../ModulesContext";
 import Utils from "../utils";
 import TaskTime from "./TaskTime";
 
@@ -23,8 +24,10 @@ function Task(props) {
   const inputRef = React.createRef();
   // it used here to focus and select text in it when desc input changes
   useEffect(() => {
-    inputRef.current.focus();
-    inputRef.current.select();
+    if (inputRef.current) {
+      inputRef.current.focus();
+      inputRef.current.select();
+    }
     // eslint-disable-next-line
   }, [descInput]);
 
@@ -42,7 +45,7 @@ function Task(props) {
     props.changeTask(changedTask);
   };
 
-  const handleOnDblClick = () => {
+  const handleOnClickEdit = () => {
     setDescInput(true);
   };
 
@@ -55,79 +58,108 @@ function Task(props) {
     changedTask.timer = newParams;
     props.changeTask(changedTask);
   };
+  //-----------------------
+  const TaskDescription = (props) => {
+    if (!descInput)
+      return (
+        <div
+          className={
+            props.task.completed && !descInput
+              ? "task-description finished"
+              : "task-description"
+          }
+        >
+          {props.task.description}
+        </div>
+      );
 
+    return (
+      <input
+        ref={inputRef}
+        placeholder='Enter a task...'
+        className={
+          props.task.completed && !descInput
+            ? "task-text-input finished"
+            : "task-text-input"
+        }
+        type='text'
+        onBlur={handleOnBlur}
+        onChange={handleTextOnChange}
+        value={props.task.description}
+        style={{
+          color: props.theme.text,
+        }}
+        autoFocus
+      />
+    );
+  };
   //==========================================================================
 
   return (
-    <ThemeContext.Consumer>
-      {({ theme }) => (
-        <li
-          key={props.task.key}
-          style={{
-            border: `solid 1px ${theme.text}50`,
-            boxShadow: `0 4px 2px ${theme.text}20`,
-          }}
-          onMouseEnter={(e) =>
-            Utils.handleHoverEnter(
-              e,
-              `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`,
-              theme.listBackground
-            )
-          }
-          onMouseLeave={(e) =>
-            Utils.handleHoverLeave(
-              e,
-              `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`
-            )
-          }
-        >
-          <input
-            type='checkbox'
-            onChange={checkboxOnChange}
-            style={{ backgroundColor: theme.listBackground }}
-            checked={props.task.completed}
-          />
-          {/*onDoubleClick doesn't work with disabled input this is why this div is here*/}
-          <div className='task-description' onDoubleClick={handleOnDblClick}>
-            <input
-              ref={inputRef}
-              placeholder='Enter a task...'
-              className={
-                props.task.completed && !descInput
-                  ? "task-text-input finished"
-                  : "task-text-input"
-              }
-              type='text'
-              onBlur={handleOnBlur}
-              onChange={handleTextOnChange}
-              value={props.task.description}
-              style={{
-                color: theme.text,
-              }}
-              disabled={!descInput}
-              autoFocus
-            />
-          </div>
-          <button
-            className='delete-task-button'
-            onClick={() => props.deleteTask(props.task.key)}
-          >
-            <i className='fas fa-trash' style={{ color: theme.text }}></i>
-          </button>
-          <ModulesContext.Consumer>
-            {({ params }) => {
-              if (params.taskTime.enabled)
-                return (
-                  <TaskTime
-                    handleTimerChange={handleTimerChange}
-                    timer={props.task.timer}
-                  />
-                );
-            }}
-          </ModulesContext.Consumer>
-        </li>
+    <Draggable draggableId={"" + props.task.key} index={props.index}>
+      {(provided) => (
+        <ThemeContext.Consumer>
+          {({ theme }) => (
+            <li
+              key={props.task.key}
+              ref={provided.innerRef}
+              {...provided.draggableProps}
+              {...provided.dragHandleProps}
+              className='task-row'
+            >
+              <div
+                style={{
+                  border: `solid 1px ${theme.text}50`,
+                  boxShadow: `0 4px 2px ${theme.text}20`,
+                }}
+                onMouseEnter={(e) =>
+                  Utils.handleHoverEnter(
+                    e,
+                    `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`,
+                    theme.listBackground
+                  )
+                }
+                onMouseLeave={(e) =>
+                  Utils.handleHoverLeave(
+                    e,
+                    `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`
+                  )
+                }
+                className='task'
+              >
+                <input
+                  type='checkbox'
+                  onChange={checkboxOnChange}
+                  style={{ backgroundColor: theme.listBackground }}
+                  checked={props.task.completed}
+                />
+                <TaskDescription task={props.task} theme={theme} />
+                <button className='edit-task-button' onClick={handleOnClickEdit}>
+                  <i className='fas fa-pen'></i>
+                </button>
+                <button
+                  className='delete-task-button'
+                  onClick={() => props.deleteTask(props.task.key)}
+                >
+                  <i className='fas fa-trash' style={{ color: theme.text }}></i>
+                </button>
+              </div>
+              <ModulesContext.Consumer>
+                {({ params }) => {
+                  if (params.taskTime.enabled)
+                    return (
+                      <TaskTime
+                        handleTimerChange={handleTimerChange}
+                        timer={props.task.timer}
+                      />
+                    );
+                }}
+              </ModulesContext.Consumer>
+            </li>
+          )}
+        </ThemeContext.Consumer>
       )}
-    </ThemeContext.Consumer>
+    </Draggable>
   );
 }
 

@@ -30,7 +30,7 @@ let Utils = {
   // on brightness using 'changeColorByLuma' function
   handleHoverEnter: (e, styles, bgColor) => {
     e.currentTarget.style =
-      `background: ${Utils.changeColorByLuma(bgColor)};` + styles;
+    (bgColor ? `background: ${Utils.changeColorByLuma(bgColor)};` : '') + styles;
   },
 
   handleHoverLeave: (e, styles) => {

@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import ThemeContext from "../ThemeContext";
 import Task from "./Task";
 import Utils from "../utils";
@@ -20,7 +21,7 @@ function TaskList(props) {
   const addNewTask = () => {
     setTasks(
       tasks.concat({
-        key: new Date().getUTCMilliseconds(),
+        key: new Date().getTime(),
         description: "",
         completed: false,
         timer: {
@@ -49,6 +50,16 @@ function TaskList(props) {
     );
   };
 
+  //-----------------------------------------------------------------
+  //Drag and drop function
+  const handleDragEnd = (result) => {
+    if (result.destination) {
+      const changedList = tasks.slice();
+      const [item] = changedList.splice(result.source.index, 1);
+      changedList.splice(result.destination.index, 0, item);
+      setTasks(changedList);
+    }
+  };
   //=================================================================
 
   return (
@@ -58,18 +69,30 @@ function TaskList(props) {
           className='flex ac-column'
           style={{ backgroundColor: theme.listBackground }}
         >
-          <ul id='task-list'>
-            {tasks.map((task) => {
-              return (
-                <Task
-                  key={task.key}
-                  deleteTask={deleteTask}
-                  changeTask={changeTask}
-                  task={task}
-                />
-              );
-            })}
-          </ul>
+          <DragDropContext onDragEnd={handleDragEnd}>
+            <Droppable droppableId='task-list'>
+              {(provided) => (
+                <ul
+                  id='task-list'
+                  {...provided.droppableProps}
+                  ref={provided.innerRef}
+                >
+                  {tasks.map((task, index) => {
+                    return (
+                      <Task
+                        key={task.key}
+                        deleteTask={deleteTask}
+                        changeTask={changeTask}
+                        task={task}
+                        index={index}
+                      />
+                    );
+                  })}
+                  {provided.placeholder}
+                </ul>
+              )}
+            </Droppable>
+          </DragDropContext>
           <button
             id='add-button'
             onClick={addNewTask}
