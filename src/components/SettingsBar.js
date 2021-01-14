@@ -11,7 +11,6 @@ function getAllThemes() {
 }
 
 function SettingsBar(props) {
-
   return (
     <div id='settings-sidebar' className='flex ac-column'>
       <header>
