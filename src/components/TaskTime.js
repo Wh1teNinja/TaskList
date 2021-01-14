@@ -1,3 +1,5 @@
+import ThemeContext from "../ThemeContext";
+
 function TaskTime(props) {
   const tick = () => {
     props.timer.time++;
@@ -33,12 +35,16 @@ function TaskTime(props) {
   );
 
   return (
-    <div className='task-time'>
-      <span className='timer'>{formattedTime()}</span>
-      <button className='timer-switch' onClick={handleTimeSwitchClick}>
-        {button}
-      </button>
-    </div>
+    <ThemeContext.Consumer>
+      {({ theme }) => (
+        <div className='task-time' style={{backgroundColor: theme.listBackground, color: theme.text}}>
+          <span className='timer'>{formattedTime()}</span>
+          <button className='timer-button' onClick={handleTimeSwitchClick} style={{color: theme.text, borderColor: theme.text}}>
+            {button}
+          </button>
+        </div>
+      )}
+    </ThemeContext.Consumer>
   );
 }
 
