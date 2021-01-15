@@ -58,11 +58,19 @@ function Task(props) {
     changedTask.timer = newParams;
     props.changeTask(changedTask);
   };
-  //-----------------------
+  //-------------------------------------------------------------------
+  const TaskButton = (props) => {
+    if (!descInput)
+      return <i className='fas fa-pen' style={{ color: props.theme.text }}></i>;
+    return <i class='fas fa-check' style={{ color: props.theme.text }}></i>;
+  };
+
+  //-------------------------------------------------------------------
   const TaskDescription = (props) => {
     if (!descInput)
       return (
         <div
+          style={{ color: props.theme.text }}
           className={
             props.task.completed && !descInput
               ? "task-description finished"
@@ -88,6 +96,7 @@ function Task(props) {
         value={props.task.description}
         style={{
           color: props.theme.text,
+          fontStyle: "italic",
         }}
         autoFocus
       />
@@ -134,11 +143,11 @@ function Task(props) {
                   checked={props.task.completed}
                 />
                 <TaskDescription task={props.task} theme={theme} />
-                <button className='edit-task-button' onClick={handleOnClickEdit}>
-                  <i className='fas fa-pen'></i>
+                <button className='task-button' onClick={handleOnClickEdit}>
+                  <TaskButton theme={theme}/>
                 </button>
                 <button
-                  className='delete-task-button'
+                  className='task-button'
                   onClick={() => props.deleteTask(props.task.key)}
                 >
                   <i className='fas fa-trash' style={{ color: theme.text }}></i>
