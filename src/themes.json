@@ -1,12 +1,27 @@
 {
+  "classic": {
+    "background": "#ffffff",
+    "listBackground": "#eeeeee",
+    "text": "#256faf"
+  },
+  "dark": {
+    "background": "#444444",
+    "listBackground": "#333333",
+    "text": "#35a0fc"
+  },
   "pink": {
     "background": "#fdddff",
     "listBackground": "#d8d8d8",
     "text": "#625466"
   },
   "midnight": {
-    "background": "#14192C",
-    "listBackground": "#262642",
-    "text": "#40525E"
+    "background": "#141b26",
+    "listBackground": "#192436",
+    "text": "#d9bc66"
+  },
+  "Patriot": {
+    "background": "#B22234",
+    "listBackground": "#3C3B6E",
+    "text": "#ffffff"
   }
 }

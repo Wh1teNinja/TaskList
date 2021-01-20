@@ -65,50 +65,58 @@ function TaskList(props) {
   return (
     <ThemeContext.Consumer>
       {({ theme }) => (
-        <main
+        <div
+          id='task-list-area'
           className='flex ac-column'
           style={{ backgroundColor: theme.listBackground }}
         >
-          <DragDropContext onDragEnd={handleDragEnd}>
-            <Droppable droppableId='task-list'>
-              {(provided) => (
-                <ul
-                  id='task-list'
-                  {...provided.droppableProps}
-                  ref={provided.innerRef}
-                >
-                  {tasks.map((task, index) => {
-                    return (
-                      <Task
-                        key={task.key}
-                        deleteTask={deleteTask}
-                        changeTask={changeTask}
-                        task={task}
-                        index={index}
-                      />
-                    );
-                  })}
-                  {provided.placeholder}
-                </ul>
-              )}
-            </Droppable>
-          </DragDropContext>
-          <button
-            id='add-button'
-            onClick={addNewTask}
-            style={{ color: theme.text }}
-            onMouseEnter={(e) =>
-              Utils.handleHoverEnter(
-                e,
-                `color: ${theme.text};`,
-                theme.listBackground
-              )
-            }
-            onMouseLeave={(e) => Utils.handleHoverLeave(e, `color: ${theme.text};`)}
-          >
-            + Add
-          </button>
-        </main>
+          <header style={{ color: theme.text }}>
+            <h1>Task List</h1>
+          </header><span className='line' style={{ backgroundColor: theme.text }}></span>
+          <main>
+            <DragDropContext onDragEnd={handleDragEnd}>
+              <Droppable droppableId='task-list'>
+                {(provided) => (
+                  <ul
+                    id='task-list'
+                    {...provided.droppableProps}
+                    ref={provided.innerRef}
+                  >
+                    {tasks.map((task, index) => {
+                      return (
+                        <Task
+                          key={task.key}
+                          deleteTask={deleteTask}
+                          changeTask={changeTask}
+                          task={task}
+                          index={index}
+                        />
+                      );
+                    })}
+                    {provided.placeholder}
+                  </ul>
+                )}
+              </Droppable>
+            </DragDropContext>
+            <button
+              id='add-button'
+              onClick={addNewTask}
+              style={{ color: theme.text }}
+              onMouseEnter={(e) =>
+                Utils.handleHoverEnter(
+                  e,
+                  `color: ${theme.text};`,
+                  theme.listBackground
+                )
+              }
+              onMouseLeave={(e) =>
+                Utils.handleHoverLeave(e, `color: ${theme.text};`)
+              }
+            >
+              + Add
+            </button>
+          </main>
+        </div>
       )}
     </ThemeContext.Consumer>
   );

@@ -13,6 +13,7 @@ import ThemeContext from "../ThemeContext";
 import ModulesContext from "../ModulesContext";
 import Utils from "../utils";
 import TaskTime from "./TaskTime";
+import CustomCheckbox from './CustomCheckbox';
 
 function Task(props) {
   // This state changes to 'false' when double clicked on task '<p>' and goes back to 'true' with 'onBlur'
@@ -62,7 +63,7 @@ function Task(props) {
   const TaskButton = (props) => {
     if (!descInput)
       return <i className='fas fa-pen' style={{ color: props.theme.text }}></i>;
-    return <i class='fas fa-check' style={{ color: props.theme.text }}></i>;
+    return <i className='fas fa-check' style={{ color: props.theme.text }}></i>;
   };
 
   //-------------------------------------------------------------------
@@ -119,32 +120,32 @@ function Task(props) {
               <div
                 style={{
                   border: `solid 1px ${theme.text}50`,
-                  boxShadow: `0 4px 2px ${theme.text}20`,
+                  boxShadow: `2px 4px 2px ${theme.text}20`,
+                  backgroundColor: theme.listBackground,
                 }}
                 onMouseEnter={(e) =>
                   Utils.handleHoverEnter(
                     e,
-                    `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`,
+                    `border: solid 1px ${theme.text}50; box-shadow: 2px 4px 2px ${theme.text}20;`,
                     theme.listBackground
                   )
                 }
                 onMouseLeave={(e) =>
                   Utils.handleHoverLeave(
                     e,
-                    `border: solid 1px ${theme.text}50; box-shadow: 1px 2px 1px ${theme.text}50;`
+                    `border: solid 1px ${theme.text}50; box-shadow: 2px 4px 2px ${theme.text}20; background-color: ${theme.listBackground};`
                   )
                 }
                 className='task'
               >
-                <input
+                <CustomCheckbox
                   type='checkbox'
                   onChange={checkboxOnChange}
-                  style={{ backgroundColor: theme.listBackground }}
                   checked={props.task.completed}
                 />
                 <TaskDescription task={props.task} theme={theme} />
                 <button className='task-button' onClick={handleOnClickEdit}>
-                  <TaskButton theme={theme}/>
+                  <TaskButton theme={theme} />
                 </button>
                 <button
                   className='task-button'

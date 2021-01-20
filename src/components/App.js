@@ -54,9 +54,6 @@ function App() {
     >
       <ThemeContext.Provider value={{ theme, changeTheme }}>
         <div id='app' style={{ backgroundColor: theme.background }}>
-          <header>
-            <h1>Task List</h1>
-          </header>
           <SettingsBar />
           <TaskList />
         </div>

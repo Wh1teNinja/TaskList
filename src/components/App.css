@@ -1,3 +1,168 @@
+/*===============< FONTS >===============*/
+/*Balsamiq sans*/
+@font-face {
+  font-family: "Balsamiq Sans";
+  src: local("BalsamiqSans-Bold"),
+    url("../fonts/Balsamiq_Sans/BalsamiqSans-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Balsamiq Sans";
+  src: local("BalsamiqSans-BoldItalic"),
+    url("../fonts/Balsamiq_Sans/BalsamiqSans-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Balsamiq Sans";
+  src: local("BalsamiqSans-Italic"),
+    url("../fonts/Balsamiq_Sans/BalsamiqSans-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Balsamiq Sans";
+  src: local("BalsamiqSans-Regular"),
+    url("../fonts/Balsamiq_Sans/BalsamiqSans-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+/*Nunito*/
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-ExtraLight"),
+    url("../fonts/Nunito/Nunito-ExtraLight.ttf") format("truetype");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-ExtraLightItalic"),
+    url("../fonts/Nunito/Nunito-ExtraLightItalic.ttf") format("truetype");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-Light"),
+    url("../fonts/Nunito/Nunito-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-LightItalic"),
+    url("../fonts/Nunito/Nunito-LightItalic.ttf") format("truetype");
+  font-weight: 300;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-Regular"),
+    url("../fonts/Nunito/Nunito-Regular.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-Italic"),
+    url("../fonts/Nunito/Nunito-Italic.ttf") format("truetype");
+  font-weight: 400;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-SemiBold"),
+    url("../fonts/Nunito/Nunito-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-SemiBoldItalic"),
+    url("../fonts/Nunito/Nunito-SemiBoldItalic.ttf") format("truetype");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-Bold"),
+    url("../fonts/Nunito/Nunito-Bold.ttf") format("truetype");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-BoldItalic"), url("../fonts/Nunito/Nunito-BoldItalic.ttf") format("truetype");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-ExtraBold"),
+    url("../fonts/Nunito/Nunito-ExtraBold.ttf") format("truetype");
+  font-weight: 800;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-ExtraBoldItalic"),
+    url("../fonts/Nunito/Nunito-ExtraBoldItalic.ttf") format("truetype");
+  font-weight: 800;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-Black"),
+    url("../fonts/Nunito/Nunito-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Nunito";
+  src: local("Nunito-BlackItalic"),
+    url("../fonts/Nunito/Nunito-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+}
+
+
+
+h1, h2, h3, h4, h5 {
+  font-family: "Balsamiq Sans", sans-serif;
+  font-weight: 400;
+}
+
+p, li, span, button {
+  font-family: "Nunito";
+  font-weight: 600;
+}
+
+.wrapper {
+  box-sizing: border-box;
+
+  height: 100%;
+  width: 100%;
+}
+
 .flex {
   display: flex;
 }
@@ -7,24 +172,60 @@
   align-items: center;
 }
 
+.line {
+  display: block;
+  border-radius: 15px;
+  height: 3px;
+  width: 100%;
+}
+
+.custom-checkbox {
+  display: block;
+  border-radius: 5px;
+
+  width: 1.2em;
+  height: 1.2em;
+  font-size: 0.7em;
+
+  margin: 0.3em;
+  text-align: center;
+  line-height: 1.35em;
+
+  cursor: pointer;
+}
+
+
 #app {
   height: 100%;
   width: 100%;
-
-  background-color: pink;
 
   display: flex;
   flex-direction: column;
   align-items: center;
 }
 
-#app > main {
+#task-list-area {
   height: 100%;
   width: 400px;
+  margin-top: 25px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
 
   padding: 1em;
+}
 
-  background-color: #b4b4b4;
+#task-list-area > header {
+  width: 100%;
+}
+
+#task-list-area > header > h1 {
+  text-align: left;
+  margin: 15px 30px;
+}
+
+#task-list-area > main {
+  width: 100%;
+  padding: 10px;
 }
 
 #task-list {
@@ -41,22 +242,23 @@
 
 .task {
   display: flex;
-  height: 1.6rem;
+  align-items: center;
 
+  height: 1.3em;
   font-size: 1.4em;
-  padding: 0.8rem 5px;
+  padding: 0.6rem 5px;
 
   border-radius: 5px;
 }
 
-.task > input[type=checkbox] {
+.task > input[type="checkbox"] {
   -ms-transform: scale(1.4); /* IE */
   -moz-transform: scale(1.4); /* FF */
   -webkit-transform: scale(1.4); /* Safari and Chrome */
   -o-transform: scale(1.4); /* Opera */
   transform: scale(1.4);
   margin: 0.5em 0.8em;
-  
+
   cursor: pointer;
 }
 
@@ -89,7 +291,7 @@
 }
 
 .finished {
-  text-decoration:line-through;
+  text-decoration: line-through;
 }
 
 #add-button {
@@ -112,15 +314,12 @@
 
 .task-time {
   position: absolute;
-  top: 0;
+  top: 0.3em;
   left: calc(100% + 1.3em);
   font-size: 1.3em;
 
-  margin: 0.4em 0;
   border-radius: 50px;
   padding: 0.4em;
-
-  background-color: white;
 
   display: flex;
   align-items: center;
@@ -134,7 +333,7 @@
 .timer-button {
   background: none;
   border: none;
-  border-left:rgb(71, 71, 71) solid 1px;
+  border-left: rgb(71, 71, 71) solid 1px;
   padding-left: 10px;
   outline: none;
   cursor: pointer;
@@ -144,20 +343,69 @@
 
 /* Settings Sidebar */
 
-#app > #settings-sidebar {
-  background: rgb(71, 71, 71);
+#settings-aside {
   z-index: 5;
   position: absolute;
   left: 0;
-  width: 350px;
   height: 100%;
-  padding: 0 2%;
+}
+
+#settings-aside > div {
+  box-sizing: border-box;
+}
+
+#settings-sidebar > header {
+  width: 100%;
+}
+
+#settings-sidebar > header > h2 {
+  padding: 15px;
+}
+
+#settings-sidebar > div {
+  width: 100%;
+}
+
+#settings-sidebar h3 {
+  padding: 5px;
+  margin: 0;
+}
+
+#theme-picker > div {
+  display: grid;
+  grid-template-columns: repeat(4, 70px);
+  grid-template-rows: 90px;
+
+  padding: 15px;
+}
+
+.theme-picker-button > label {
+  height: 100%;
+  justify-content: space-around;
+}
+
+#settings-button {
+  position: absolute;
+  top: 10px;
+  left: 100%;
+
+  font-size: 1.5em;
+  width: 2em;
+  height: 2em;
+
+  border: none;
+  border-top-right-radius: 15px;
+  border-bottom-right-radius: 15px;
+
+  outline: none;
+  cursor: pointer;
 }
 
 .hidden-radio {
   opacity: 0;
   width: 0;
   margin: 0;
+  position: absolute;
 }
 
 .theme-picker-custom-radio {
@@ -169,6 +417,29 @@
   cursor: pointer;
 }
 
-.hidden-radio:checked + .theme-picker-custom-radio {
-  box-shadow: inset 0 0 0 4px rgb(0, 135, 255);
+#modules-parameters > main {
+  font-size: 1.1em;
+}
+
+.module-params {
+  border-radius: 15px;
+  padding: 15px 25px;
+  margin: 15px;
+}
+
+.module-params > h4 {
+  margin: 0;
+}
+
+.module-params > main {
+  margin-left: -25px;
+}
+
+.param-list {
+  list-style: none;
+  padding-left: 25px;
+}
+
+.param-list li {
+  display: flex;
 }

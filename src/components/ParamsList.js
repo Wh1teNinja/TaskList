@@ -1,4 +1,5 @@
 import modulesParamDesc from "../modulesParamDesc.json";
+import CustomCheckbox from "./CustomCheckbox";
 
 function ParamsList(props) {
   const handleParamOnChange = (params, e) => {
@@ -13,14 +14,12 @@ function ParamsList(props) {
       if (param === "enabled") {
         listContent.push(
           <li key={param}>
-            <input
-              type='checkbox'
-              id={props.module + "-switch"}
-              name={props.module}
+            <CustomCheckbox
+              id={props.module}
               onChange={(e) => handleParamOnChange(props.moduleParams, e)}
               checked={props.moduleParams.enabled}
             />
-            <label>
+            <label htmlFor={props.module}>
               {modulesParamDesc[props.module] ? "Enabled" : props.paramsDesc.title}
             </label>
           </li>
@@ -38,7 +37,7 @@ function ParamsList(props) {
       }
     }
   }
-  return <ul>{listContent}</ul>;
+  return <ul className="param-list">{listContent}</ul>;
 }
 
 export default ParamsList;
