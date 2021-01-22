@@ -17,8 +17,8 @@ function App() {
   }, [theme]);
 
   // Hooks to get set and save modules parameters
-  const [ModulesParams, setModulesParams] = useState(
-    JSON.parse(window.localStorage.getItem("ModulesParams")) || {
+  const [params, setParams] = useState(
+    JSON.parse(window.localStorage.getItem("params")) || {
       taskTime: {
         enabled: false,
         multitasking: {
@@ -28,11 +28,8 @@ function App() {
     }
   );
   useEffect(() => {
-    window.localStorage.setItem(
-      "ModulesParams",
-      JSON.stringify(ModulesParams)
-    );
-  }, [ModulesParams]);
+    window.localStorage.setItem("params", JSON.stringify(params));
+  }, [params]);
   //================================================================
 
   //=========================< Functions >==========================
@@ -43,15 +40,13 @@ function App() {
 
   // fix this and check if it changes everything or only what passed
   const changeTimerParams = (newValues) => {
-    setModulesParams(newValues);
+    setParams(newValues);
   };
 
   //=================================================================
 
   return (
-    <ModulesContext.Provider
-      value={{ params: ModulesParams, changeParams: changeTimerParams }}
-    >
+    <ModulesContext.Provider value={{ params, changeParams: changeTimerParams }}>
       <ThemeContext.Provider value={{ theme, changeTheme }}>
         <div id='app' style={{ backgroundColor: theme.background }}>
           <SettingsBar />

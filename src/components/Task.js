@@ -36,6 +36,10 @@ function Task(props) {
   const checkboxOnChange = () => {
     const changedTask = props.task;
     changedTask.completed = !changedTask.completed;
+    if (changedTask.completed) {
+      changedTask.timer.enabled = false;
+      clearInterval(changedTask.timer.timerID);
+    }
     props.changeTask(changedTask);
   };
 
@@ -60,7 +64,7 @@ function Task(props) {
     props.changeTask(changedTask);
   };
   //-------------------------------------------------------------------
-  const TaskButton = (props) => {
+  const TaskEditButton = (props) => {
     if (!descInput)
       return <i className='fas fa-pen' style={{ color: props.theme.text }}></i>;
     return <i className='fas fa-check' style={{ color: props.theme.text }}></i>;
@@ -145,7 +149,7 @@ function Task(props) {
                 />
                 <TaskDescription task={props.task} theme={theme} />
                 <button className='task-button' onClick={handleOnClickEdit}>
-                  <TaskButton theme={theme} />
+                  <TaskEditButton theme={theme} />
                 </button>
                 <button
                   className='task-button'
@@ -161,6 +165,7 @@ function Task(props) {
                       <TaskTime
                         handleTimerChange={handleTimerChange}
                         timer={props.task.timer}
+                        multitaskingCheck={() => props.multitaskingCheck(props.index)}
                       />
                     );
                 }}

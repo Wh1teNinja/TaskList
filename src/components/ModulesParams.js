@@ -3,6 +3,7 @@ import ModulesContext from "../ModulesContext";
 import ThemeContext from "../ThemeContext";
 import ParamsList from "./ParamsList";
 import Utils from "../utils";
+import Tooltip from './Tooltip';
 
 function ModulesParams(props) {
   return (
@@ -30,7 +31,11 @@ function ModulesParams(props) {
                         border: "1px solid " + theme.text,
                       }}
                     >
-                      <h4>{modulesParamDesc[module].title}</h4>
+                      <div className='flex jsp'>
+                        <h4>{modulesParamDesc[module].title}</h4>
+                          <Tooltip details={modulesParamDesc[module].desc}/>
+
+                      </div>
                       <span
                         className='line'
                         style={{ backgroundColor: theme.text, height: "1px" }}

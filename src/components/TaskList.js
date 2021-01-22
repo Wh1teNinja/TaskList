@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState, useMemo } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import ThemeContext from "../ThemeContext";
+import ModulesContext from "../ModulesContext";
 import Task from "./Task";
 import Utils from "../utils";
 
@@ -51,7 +52,7 @@ function TaskList(props) {
   };
 
   //-----------------------------------------------------------------
-  //Drag and drop function
+  // Drag and drop function
   const handleDragEnd = (result) => {
     if (result.destination) {
       const changedList = tasks.slice();
@@ -60,6 +61,33 @@ function TaskList(props) {
       setTasks(changedList);
     }
   };
+  //-----------------------------------------------------------------
+  // Task time function
+  //Multitasking check
+  const taskTimeParams = useContext(ModulesContext).params.taskTime;
+  const multitaskingCheck = (changedTaskIndex) => {
+    if (!taskTimeParams.enabled) return;
+    if (taskTimeParams.multitasking.enabled) return;
+
+    stopAllTimers(changedTaskIndex);
+  };
+
+  const stopAllTimers = (exceptionTaskIndex = -1) => {
+    setTasks(
+      tasks.map((task, index) => {
+        if (index !== exceptionTaskIndex && task.timer.enabled) {
+          task.timer.enabled = false;
+          clearInterval(task.timer.timerID);
+        }
+        return task;
+      })
+    );
+  };
+
+  // eslint-disable-next-line
+  useMemo(taskTimeParams.multitasking.enabled ? () => {} : stopAllTimers, [
+    taskTimeParams.multitasking.enabled,
+  ]);
   //=================================================================
 
   return (
@@ -72,7 +100,8 @@ function TaskList(props) {
         >
           <header style={{ color: theme.text }}>
             <h1>Task List</h1>
-          </header><span className='line' style={{ backgroundColor: theme.text }}></span>
+          </header>
+          <span className='line' style={{ backgroundColor: theme.text }}></span>
           <main>
             <DragDropContext onDragEnd={handleDragEnd}>
               <Droppable droppableId='task-list'>
@@ -90,6 +119,9 @@ function TaskList(props) {
                           changeTask={changeTask}
                           task={task}
                           index={index}
+                          multitaskingCheck={
+                            taskTimeParams.enabled && multitaskingCheck
+                          }
                         />
                       );
                     })}

@@ -16,7 +16,8 @@ function TaskTime(props) {
     }
 
     props.handleTimerChange(props.timer);
-  };
+    props.multitaskingCheck();
+  };       
 
   const formattedTime = () => {
     return (

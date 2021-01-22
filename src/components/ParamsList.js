@@ -1,5 +1,6 @@
 import modulesParamDesc from "../modulesParamDesc.json";
 import CustomCheckbox from "./CustomCheckbox";
+import Tooltip from './Tooltip';
 
 function ParamsList(props) {
   const handleParamOnChange = (params, e) => {
@@ -22,6 +23,7 @@ function ParamsList(props) {
             <label htmlFor={props.module}>
               {modulesParamDesc[props.module] ? "Enabled" : props.paramsDesc.title}
             </label>
+            {modulesParamDesc[props.module] ? "" : <Tooltip details={props.paramsDesc.desc}/>}
           </li>
         );
       } else {

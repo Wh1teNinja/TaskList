@@ -172,6 +172,10 @@ p, li, span, button {
   align-items: center;
 }
 
+.jsp {
+  justify-content: space-between;
+}
+
 .line {
   display: block;
   border-radius: 15px;
@@ -188,6 +192,7 @@ p, li, span, button {
   font-size: 0.7em;
 
   margin: 0.3em;
+  margin-bottom: 0.45em;
   text-align: center;
   line-height: 1.35em;
 
@@ -427,7 +432,7 @@ p, li, span, button {
   margin: 15px;
 }
 
-.module-params > h4 {
+.module-params h4 {
   margin: 0;
 }
 
@@ -438,8 +443,36 @@ p, li, span, button {
 .param-list {
   list-style: none;
   padding-left: 25px;
+  margin-block-end: 0;
 }
 
 .param-list li {
   display: flex;
+  align-items: center;
+}
+
+.more-info {
+  position: relative;
+  height: 1.2em;
+  width: 1em;
+  font-size: 1em;
+  margin-left: 15px;
+}
+
+.more-info .details {
+  visibility: hidden;
+  font-size: 0.7em;
+  width: 150px;
+  border-radius: 5px;
+  padding: 5px;
+  text-align: center;
+  box-sizing: border-box;
+
+  position: absolute;
+  bottom: 100%;
+  left: calc(-75px + 1em);
+}
+
+.more-info:hover .details {
+  visibility: visible;
 }
