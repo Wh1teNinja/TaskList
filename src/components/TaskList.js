@@ -4,7 +4,7 @@ import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import ThemeContext from "../ThemeContext";
 import ModulesContext from "../ModulesContext";
 import Task from "./Task";
-import Utils from "../utils";
+import Utils from "../utils.js";
 
 function TaskList(props) {
   //==========================< Hooks >=============================

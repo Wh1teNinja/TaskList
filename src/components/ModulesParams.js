@@ -3,7 +3,7 @@ import modulesParamDesc from "../modulesParamDesc.json";
 import ModulesContext from "../ModulesContext";
 import ThemeContext from "../ThemeContext";
 import ParamsList from "./ParamsList";
-import Utils from "../utils";
+import Utils from "../utils.js";
 import Tooltip from './Tooltip';
 
 function ModulesParams(props) {
