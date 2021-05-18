@@ -467,6 +467,7 @@ p, li, span, button {
   padding: 5px;
   text-align: center;
   box-sizing: border-box;
+  margin: 3px 0;
 
   position: absolute;
   bottom: 100%;
