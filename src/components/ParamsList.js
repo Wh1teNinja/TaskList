@@ -1,3 +1,4 @@
+import React from 'react';
 import modulesParamDesc from "../modulesParamDesc.json";
 import CustomCheckbox from "./CustomCheckbox";
 import Tooltip from './Tooltip';

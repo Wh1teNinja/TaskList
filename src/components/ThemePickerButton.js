@@ -1,3 +1,4 @@
+import React from 'react';
 import ThemeContext from "../ThemeContext.js";
 import Utils from '../utils';
 

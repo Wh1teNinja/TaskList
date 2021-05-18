@@ -1,3 +1,4 @@
+import React from 'react';
 import ThemePickerButton from "./ThemePickerButton";
 import ModulesParams from "./ModulesParams";
 import ThemeContext from "../ThemeContext";

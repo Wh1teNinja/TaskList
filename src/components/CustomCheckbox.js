@@ -1,3 +1,4 @@
+import React from 'react';
 import ThemeContext from "../ThemeContext";
 
 // make this thing of adjustable size by css

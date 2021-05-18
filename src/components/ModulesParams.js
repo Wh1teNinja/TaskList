@@ -1,3 +1,4 @@
+import React from 'react';
 import modulesParamDesc from "../modulesParamDesc.json";
 import ModulesContext from "../ModulesContext";
 import ThemeContext from "../ThemeContext";
