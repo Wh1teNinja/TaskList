@@ -10,7 +10,7 @@ function App() {
   //==========================< Hooks >=============================
   // Hooks to get, set and save theme option
   const [theme, setTheme] = useState(
-    JSON.parse(window.localStorage.getItem("theme")) || themes.pink
+    JSON.parse(window.localStorage.getItem("theme")) || themes.classic
   );
   useEffect(() => {
     window.localStorage.setItem("theme", JSON.stringify(theme));
